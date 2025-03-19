@@ -39,20 +39,19 @@ function draw(){
     }
     canvasCtx.lineTo(w, h / 2);
     canvasCtx.stroke();
+    canvasCtx.closePath();
 
-    for(let i=0;i<bufferLength;i+=2){
-        const v = freqArray[i] / 128.0;
-      const y = v * (h / 2);
-    
-      if (i === 0) {
-        canvasCtx.moveTo(x, y);
-      } else {
-        canvasCtx.lineTo(x, y);
-      }
-      x += sw;
-        }
-        canvasCtx.lineTo(w, h / 2);
-        canvasCtx.stroke();
+x=0
+const barWidth = (w / bufferLength) * 2.5;
+let barHeight;
+x = 0;
+for (let i = 0; i < bufferLength; i++) {
+    barHeight = freqArray[i] / 2;
+    canvasCtx.fillStyle = `rgb(50 50 ${barHeight + 100})`;
+    canvasCtx.fillRect(x, h, barWidth, barHeight);
+  
+    x += (barWidth + 1);
+  }
     requestAnimationFrame(draw)
 }
 requestAnimationFrame(draw)
