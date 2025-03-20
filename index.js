@@ -1,4 +1,15 @@
 const audioMap = new Map();
+const colorPallette=[
+["#060647","#080896",(i)=>`rgb(105 25 ${(i/bufferLength) * 115+(255-115)})`],
+["#fadb61","#b00202",(i)=>`rgb(${(i/bufferLength) * 15+(255-15)} 100 25)`],
+["white","#11ff00",(i)=>`rgb(0 0 ${(i/bufferLength) * 115+(255-115)})`]
+]
+let colorOption=0
+document.querySelector(".color").addEventListener("click",()=>
+  {colorOption++
+    colorOption=colorOption%colorPallette.length
+  }
+)
 audioMap.set("Sample1.mp3","Sample1.mp3")
 audioMap.set("Sample2.mp3","Sample2.mp3")
 let audio=document.querySelector("audio")
@@ -19,10 +30,11 @@ canvas.height=300;
 const w=canvas.width;
   const h=canvas.height;
 const canvasCtx=canvas.getContext("2d");
+document.querySelector(".fileButton").addEventListener("click",()=>fileInput.click())
 fileInput.addEventListener('change', (event) => {
   const file = event.target.files[0];
   const url = URL.createObjectURL(file);
-  canvasCtx.fillStyle = "#060647";
+  canvasCtx.fillStyle = colorPallette[colorOption][0];
   canvasCtx.fillRect(0, 0, w, h);
   select.innerHTML=select.innerHTML+`<option>${file.name}</option>`
 audio.src=url
@@ -36,36 +48,34 @@ function draw(){
   audio.play()
   val=select.value
   }
-    if(audio.paused){
-        requestAnimationFrame(draw)
-        return;
+    if(!audio.paused){
+      analyser.getByteFrequencyData(freqArray);
+      analyser.getByteTimeDomainData(timeArray);
     }
-    analyser.getByteFrequencyData(freqArray);
-    analyser.getByteTimeDomainData(timeArray);
-    canvasCtx.fillStyle = "#060647";
+    canvasCtx.fillStyle = colorPallette[colorOption][0];
     canvasCtx.fillRect(0, 0, w, h);
     canvasCtx.lineWidth = 2;
-    canvasCtx.strokeStyle = "#080896";
+    canvasCtx.strokeStyle = colorPallette[colorOption][1];
     canvasCtx.beginPath();
 let x=0
 let skip=5
-//
-//freqencies
-//
+///////////////
+///frequency///
+///////////////
 const barWidth = (w / bufferLength)*1.5*skip;
 let barHeight;
 x = 0;
 for (let i = 0; i < bufferLength; i+=skip) {
     barHeight = freqArray[i];
-    canvasCtx.fillStyle = `rgb(105 25 ${(i/bufferLength) * 115+(255-115)})`;
-    canvasCtx.fillRect(x, (h/2)-barHeight/2, barWidth, barHeight);
+    canvasCtx.fillStyle = colorPallette[colorOption][2](i);
+    canvasCtx.fillRect(x, (h/2)-barHeight/2, barWidth, barHeight+1);
   
     x += (barWidth);
   }
   x = 0;  
-  //
-  //time
-  //
+  ////////
+  //time//
+  ////////
   let timeSkip=1
   const sw = (w / bufferLength)*timeSkip;
     for(let i=0;i<bufferLength;i+=timeSkip){
