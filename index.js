@@ -10,7 +10,6 @@ audioMap.set("Sample1.mp3","Sample1.mp3")
 audioMap.set("Sample2.mp3","Sample2.mp3")
 //set up select and file input
 const select=document.querySelector("select")
-let val=select.value
 const fileInput = document.querySelector('input[type="file"]');
 //set up audio
 const audio=document.querySelector("audio")
@@ -51,14 +50,13 @@ document.querySelector(".fileButton").addEventListener("click",()=>fileInput.cli
     }
   })
 //start
-audio.play()
+let val=select.value
 requestAnimationFrame(draw)
 
 function draw(){
   //set song
   if(val!=select.value){
   audio.src=audioMap.get(select.value)
-  audio.play()
   val=select.value
   }
   //pause visualizer if paused
