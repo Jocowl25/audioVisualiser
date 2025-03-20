@@ -1,5 +1,35 @@
+body{
+background-color: black;
+}
+h1{
+    color:white;
+    font-size:70px;
+}
 canvas{
 width:600px;
 height:300px;
-border:2px solid blue;
+border: 2px solid rgb(255, 255, 255);
+border-radius:20px;
+}
+audio{
+    height:50px;
+}
+select{
+    margin-bottom:5px;
+    height:100px;
+    font-size: 30px;
+    width:200px;
+}
+input{
+    margin-left:290px;
+    margin-bottom:5px;
+    font-size: 20px;
+}
+.flex{
+    display:flex;
+    width:100vw;
+    height:100vh;
+    align-items:center;
+    justify-content: center;
+    flex-flow:column;
 }

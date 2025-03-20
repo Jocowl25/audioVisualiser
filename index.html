@@ -8,9 +8,16 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <audio preload="auto" crossorigin="anonymous" controls src="sample-15s.mp3"></audio>
-    <br>
+    <div class="flex">
+      <h1>Audio Viewer</h1>
+    <input type="file" id="input"/>
+    <select>
+      <option>Sample1.mp3</option>
+      <option>Sample2.mp3</option>
+    </select>
     <canvas></canvas>
+    <audio preload="auto" crossorigin="anonymous" controls src="Sample1.mp3"></audio>
+  </div>
     <script src="index.js"></script>
   </body>
 </html>
