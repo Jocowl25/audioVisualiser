@@ -35,6 +35,7 @@ select{
     width:300px;
     align-items:center;
     border-radius:20px;
+    border:none;
 }
 .color{
     margin-top:5px;
@@ -43,6 +44,7 @@ select{
     width:300px;
     align-items:center;
     border-radius:50px;
+    border:none;
 }
 
 input{
@@ -58,6 +60,9 @@ input{
 }
 button:hover{
     background-color:rgb(191, 187, 187);
+}
+button:active{
+    background-color:rgb(168, 161, 161);
 }
 select:hover{
     background-color:rgb(191, 187, 187);
