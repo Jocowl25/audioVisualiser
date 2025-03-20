@@ -10,9 +10,13 @@ width:600px;
 height:300px;
 border: 2px solid rgb(255, 255, 255);
 border-radius:20px;
+position:relative;
+z-index:0;
 }
 audio{
     height:50px;
+    z-index:100;
+    position:relative;
 }
 select{
     margin-bottom:5px;
@@ -32,7 +36,7 @@ input{
 .flex{
     display:flex;
     width:100vw;
-    height:100vh;
+    height:100%;
     align-items:center;
     justify-content: center;
     flex-flow:column;
