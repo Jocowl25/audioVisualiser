@@ -16,14 +16,18 @@ audio{
 }
 select{
     margin-bottom:5px;
-    height:100px;
+    height:50px;
     font-size: 30px;
-    width:200px;
+    width:300px;
+    text-align:center;
+    border-radius:10px;
 }
 input{
-    margin-left:290px;
     margin-bottom:5px;
     font-size: 20px;
+    width:120px;
+    align-items:center;
+    border-radius:10px;
 }
 .flex{
     display:flex;

@@ -1,4 +1,3 @@
-console.clear()
 const audioMap = new Map();
 audioMap.set("Sample1.mp3","Sample1.mp3")
 audioMap.set("Sample2.mp3","Sample2.mp3")
@@ -27,9 +26,8 @@ fileInput.addEventListener('change', (event) => {
   canvasCtx.fillRect(0, 0, w, h);
   select.innerHTML=select.innerHTML+`<option>${file.name}</option>`
 audio.src=url
-select.value=file.name
 audioMap.set(file.name, url);
-audio.play()
+select.value=file.name
 });
 let val=select.value
 function draw(){
