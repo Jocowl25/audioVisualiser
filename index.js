@@ -47,10 +47,11 @@ function draw(){
     canvasCtx.lineWidth = 2;
     canvasCtx.strokeStyle = "#080896";
     canvasCtx.beginPath();
-    const sw = w / bufferLength;
-
 let x=0
 let skip=5
+//
+//freqencies
+//
 const barWidth = (w / bufferLength)*1.5*skip;
 let barHeight;
 x = 0;
@@ -62,7 +63,12 @@ for (let i = 0; i < bufferLength; i+=skip) {
     x += (barWidth);
   }
   x = 0;  
-    for(let i=0;i<bufferLength;i++){
+  //
+  //time
+  //
+  let timeSkip=1
+  const sw = (w / bufferLength)*timeSkip;
+    for(let i=0;i<bufferLength;i+=timeSkip){
     const v = timeArray[i] / 128.0;
   const y = v * (h / 2);
 
