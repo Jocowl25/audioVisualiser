@@ -40,15 +40,16 @@ document.querySelector(".color").addEventListener("click",()=>
   })
 document.querySelector(".fileButton").addEventListener("click",()=>fileInput.click())
   fileInput.addEventListener('change', (event) => {
-  const file = event.target.files[0];
-  const url = URL.createObjectURL(file);
-  canvasCtx.fillStyle = colorPallette[colorOption][0];
-  canvasCtx.fillRect(0, 0, w, h);
-  select.innerHTML=`<option>${file.name}</option>`+select.innerHTML
-  audio.src=url
-  audioMap.set(file.name, url);
-  select.value=file.name
-});
+    for (const file of fileInput.files){
+      const url = URL.createObjectURL(file);
+      canvasCtx.fillStyle = colorPallette[colorOption][0];
+      canvasCtx.fillRect(0, 0, w, h);
+      select.innerHTML=`<option>${file.name}</option>`+select.innerHTML
+      audio.src=url
+      audioMap.set(file.name, url);
+      select.value=file.name
+    }
+  })
 //start
 audio.play()
 requestAnimationFrame(draw)
