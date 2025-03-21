@@ -7,8 +7,8 @@ const colorPallette=[
 let colorOption=0
 //set up list of default songs
 const audioMap = new Map();
-audioMap.set("Sample1.mp3","Sample1.mp3")
-audioMap.set("Sample2.mp3","Sample2.mp3")
+audioMap.set("Sample1.mp3","./Sample1.mp3")
+audioMap.set("Sample2.mp3","./Sample2.mp3")
 //set up select and file input
 const select=document.querySelector("select")
 const fileInput = document.querySelector('input[type="file"]');
