@@ -1,5 +1,5 @@
-//colors
 window.addEventListener("load", function () {
+//colors
 const colorPallette=[
 ["#060647","#0209d1",(i)=>`rgb(105 25 ${(i/FreqBufferLength) * 115+(255-115)})`],
 ["#fadb61","#b00202",(i)=>`rgb(${(i/FreqBufferLength) * 15+(255-15)} 100 25)`],
