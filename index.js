@@ -97,7 +97,7 @@ for (let i = 0; i < FreqBufferLength; i+=skip) {
   const sw = (w / TimeBufferLength)*timeSkip;
     for(let i=0;i<TimeBufferLength;i+=timeSkip){
     const v = timeArray[i] / 128.0;
-  const y = v * (h / 2);
+  const y =(v*40 + ((h / 2)-40));
 
   if (i === 0) {
     canvasCtx.moveTo(x, y);
