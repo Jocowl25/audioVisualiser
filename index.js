@@ -16,7 +16,6 @@ const select=document.querySelector("select")
 const fileInput = document.querySelector('input[type="file"]');
 //set up audio
 const audio=document.querySelector("audio")
-audio.controls="true"
 const audioCtx = new AudioContext();
 const source = audioCtx.createMediaElementSource(audio);
 //set up analyser
