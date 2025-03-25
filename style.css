@@ -85,6 +85,7 @@ button:active{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    cursor:pointer;
 }
 svg{
     color:rgba(255, 255, 255, 0.446);
