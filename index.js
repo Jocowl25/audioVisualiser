@@ -1,5 +1,7 @@
-window.addEventListener("load", function () {
-//colors
+
+document.getElementById("start").addEventListener("click", function () {
+  document.getElementById("start").style.display="none";
+  //colors
 const colorPallette=[
 ["#060647","#0209d1",(i)=>`rgb(105 25 ${(i/FreqBufferLength) * 115+(255-115)})`],
 ["#fadb61","#b00202",(i)=>`rgb(${(i/FreqBufferLength) * 15+(255-15)} 100 25)`],
@@ -14,6 +16,7 @@ const select=document.querySelector("select")
 const fileInput = document.querySelector('input[type="file"]');
 //set up audio
 const audio=document.querySelector("audio")
+audio.controls="true"
 const audioCtx = new AudioContext();
 const source = audioCtx.createMediaElementSource(audio);
 //set up analyser
@@ -52,6 +55,7 @@ document.querySelector(".fileButton").addEventListener("click",()=>fileInput.cli
   })
 //start
 let val=select.value
+audio.play()
 requestAnimationFrame(draw)
 
 function draw(){
