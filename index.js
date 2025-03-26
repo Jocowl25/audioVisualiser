@@ -38,15 +38,17 @@ document.querySelector(".color").addEventListener("click",()=>
   })
 document.querySelector(".fileButton").addEventListener("click",()=>fileInput.click())
   fileInput.addEventListener('change', (event) => {
+    let addition;
     for (const file of fileInput.files){
       const url = URL.createObjectURL(file);
       canvasCtx.fillStyle = colorPallette[colorOption][0];
       canvasCtx.fillRect(0, 0, w, h);
-      select.innerHTML=`<option>${file.name}</option>`+select.innerHTML
+      addition+=`<option>${file.name}</option>`
       audio.src=url
       audioMap.set(file.name, url);
       select.value=file.name
     }
+    select.innerHTML=addition+select.innerHTML
   })
 //start
 let val=select.value
