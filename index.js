@@ -1,7 +1,6 @@
 
-document.getElementById("start").addEventListener("click", function () {
-  document.getElementById("start").style.display="none";
   //colors
+  let init=false
 const colorPallette=[
 ["#060647","#0209d1",(i)=>`rgb(105 25 ${(i/FreqBufferLength) * 115+(255-115)})`],
 ["#fadb61","#b00202",(i)=>`rgb(${(i/FreqBufferLength) * 15+(255-15)} 100 25)`],
@@ -16,17 +15,14 @@ const select=document.querySelector("select")
 const fileInput = document.querySelector('input[type="file"]');
 //set up audio
 const audio=document.querySelector("audio")
-const audioCtx = new AudioContext();
-const source = audioCtx.createMediaElementSource(audio);
-//set up analyser
-const analyser = audioCtx.createAnalyser();
-source.connect(analyser);
-source.connect(audioCtx.destination);
-//set up analyser arrays
-const FreqBufferLength = analyser.frequencyBinCount;
-const TimeBufferLength = analyser.fftSize;
-const timeArray = new Uint8Array(TimeBufferLength);
-const freqArray = new Uint8Array(FreqBufferLength);
+//set up audioAPI variables to be fixed later
+let audioCtx;
+let source;
+let analyser;
+let FreqBufferLength;
+let TimeBufferLength;
+let timeArray;
+let freqArray;
 //set up canvas
 const canvas=document.querySelector("canvas")
 canvas.width=600;
@@ -54,7 +50,6 @@ document.querySelector(".fileButton").addEventListener("click",()=>fileInput.cli
   })
 //start
 let val=select.value
-audio.play()
 requestAnimationFrame(draw)
 
 function draw(){
@@ -65,12 +60,32 @@ function draw(){
   }
   //pause visualizer if paused
     if(!audio.paused){
+      if(!init){
+         audioCtx = new AudioContext();
+         source = audioCtx.createMediaElementSource(audio);
+        //set up analyser
+        analyser = audioCtx.createAnalyser();
+        source.connect(analyser);
+        source.connect(audioCtx.destination);
+        //set up analyser arrays
+        FreqBufferLength = analyser.frequencyBinCount;
+        TimeBufferLength = analyser.fftSize;
+        timeArray = new Uint8Array(TimeBufferLength);
+        freqArray = new Uint8Array(FreqBufferLength);
+        init=true;
+      }
       analyser.getByteFrequencyData(freqArray);
       analyser.getByteTimeDomainData(timeArray);
     }
     //set up canvas colors
     canvasCtx.fillStyle = colorPallette[colorOption][0];
     canvasCtx.fillRect(0, 0, w, h);
+    canvasCtx.strokeStyle = colorPallette[colorOption][1];
+    canvasCtx.beginPath();
+    canvasCtx.moveTo(0, h/2);
+    canvasCtx.lineTo(w, h/2);
+    canvasCtx.stroke();
+    canvasCtx.closePath();
 let x=0
 let skip=5
 ///////////////
@@ -109,6 +124,6 @@ for (let i = 0; i < FreqBufferLength; i+=skip) {
     canvasCtx.closePath();
     requestAnimationFrame(draw)
 }
-})
+
 
 

@@ -68,27 +68,3 @@ button{
 button:active{
     background-color:rgb(168, 161, 161);
 }
-#start{
-    width:100vw;
-    height:100vh;
-    position:absolute;
-    top:0;
-    display:block;
-    background-color: rgba(0, 0, 0, 0.66);
-    z-index:100;
-    color:white;
-    font-size:10px;
-    margin: 0;
-    padding:0;
-    line-height: 1px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor:pointer;
-}
-svg{
-    color:rgba(255, 255, 255, 0.446);
-    width:50%;
-    height: 50%;
-}
