@@ -10,6 +10,7 @@ let colorOption=0
 const audioMap = new Map();
 audioMap.set("Sample1.mp3","./Sample1.mp3")
 audioMap.set("Sample2.mp3","./Sample2.mp3")
+const audioOrder=["Sample1.mp3","Sample2.mp3"]
 //set up select and file input
 const select=document.querySelector("select")
 const fileInput = document.querySelector('input[type="file"]');
@@ -45,6 +46,7 @@ document.querySelector(".fileButton").addEventListener("click",()=>fileInput.cli
       canvasCtx.fillRect(0, 0, w, h);
       addition+=`<option>${file.name}</option>`
       audio.src=url
+      audioOrder.push(file.name)
       audioMap.set(file.name, url);
       select.value=file.name
     }
@@ -59,6 +61,13 @@ function draw(){
   if(val!=select.value){
   audio.src=audioMap.get(select.value)
   val=select.value
+  }
+  if(audio.ended){
+    let next=audioOrder[(audioOrder.indexOf(select.value)+1)%audioOrder.length]
+    audio.src=audioMap.get(next)
+    select.value=next
+    val=select.value
+    audio.play()
   }
   //pause visualizer if paused
     if(!audio.paused){
@@ -126,6 +135,4 @@ for (let i = 0; i < FreqBufferLength; i+=skip) {
     canvasCtx.closePath();
     requestAnimationFrame(draw)
 }
-
-
 
